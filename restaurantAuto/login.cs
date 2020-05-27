@@ -16,22 +16,18 @@ namespace restaurantAuto
 
         private void login_Load(object sender, EventArgs e)
         {
-            loginText.Select();
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "workers1DataSet.workers". При необходимости она может быть перемещена или удалена.
-            this.workersTableAdapter.Fill(this.workers1DataSet.workers);
-            // acceptButton.BorderColor = colors.darkRed;
-            //acceptButton.ButtonColor = acceptButton.OnHoverBorderColor = colors.red;
-            // acceptButton.OnHoverButtonColor = colors.lightRed;
-            acceptButton.FlatAppearance.BorderColor = colors.green;
-            acceptButton.BorderColor = colors.darkPink;
-            acceptButton.ButtonColor = acceptButton.OnHoverBorderColor = colors.pink;
-            acceptButton.OnHoverButtonColor = colors.lightPink;
-            AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                autoComplete.Add(row.Cells[0].Value.ToString());
-            }
-            loginText.AutoCompleteCustomSource = autoComplete;
+            loginText.Select(); //выбор текстбокса как активного элемента управленияя
+            this.workersTableAdapter.Fill(this.workers1DataSet.workers); // заполнение таблицы из dataset
+             acceptButton.FlatAppearance.BorderColor = colors.green;                   //цвет кнопок
+            acceptButton.BorderColor = colors.darkPink;                                //
+            acceptButton.ButtonColor = acceptButton.OnHoverBorderColor = colors.pink;  //
+            acceptButton.OnHoverButtonColor = colors.lightPink;                        //
+            AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();// автозаполнение текстбокса
+            foreach (DataGridViewRow row in dataGridView1.Rows)                            //
+            {                                                                              //
+                autoComplete.Add(row.Cells[0].Value.ToString());                           //
+            }                                                                              //
+            loginText.AutoCompleteCustomSource = autoComplete;                             //
         }
 
         private void roundTextbox1_TextChanged(object sender, EventArgs e)
@@ -41,16 +37,16 @@ namespace restaurantAuto
 
         private void roundButton1_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(loginText.Text) || String.IsNullOrWhiteSpace(loginText.Text))
+            if (String.IsNullOrEmpty(loginText.Text) || String.IsNullOrWhiteSpace(loginText.Text)) //проверка пустоты текстбокса
             {
                 MessageBox.Show("Вы не ввели логин");
             }
             else
             {
-                if (checkLogin(loginText.Text))
+                if (checkLogin(loginText.Text)) //проверка этого логина
                 {
-                    currentUser.userLogin = loginText.Text;
-                    (new password()).Show();
+                    currentUser.userLogin = loginText.Text;   // запись логина в статический класс
+                    (new password()).Show();                  // запуск формы для ввода пароля  
                 } else 
                 {
                     MessageBox.Show("Убедитесь в правильности написания или обратитесь к Администратору", "Данный пользователь не существует", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -60,7 +56,7 @@ namespace restaurantAuto
 
         private bool checkLogin(string text)
         {
-            foreach(DataGridViewRow row in dataGridView1.Rows) 
+            foreach(DataGridViewRow row in dataGridView1.Rows)  //пробег по всем элементам таблицы
             {
                 if(text == row.Cells[0].Value.ToString()) 
                 {
@@ -72,7 +68,7 @@ namespace restaurantAuto
         }
                 
 
-        private void pictureBox1_Click_1(object sender, EventArgs e)
+        private void pictureBox1_Click_1(object sender, EventArgs e)    //выход из приложения при нажатии на кнопку
         {
             Application.Exit();
         }

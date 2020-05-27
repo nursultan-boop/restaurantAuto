@@ -53,9 +53,10 @@ namespace restaurantAuto
 
         private bool checkName(string text)
         {
-            itemName = text;
-            if(!String.IsNullOrEmpty(itemName) && !String.IsNullOrWhiteSpace(itemName)) 
+            
+            if(!String.IsNullOrEmpty(text) && !String.IsNullOrWhiteSpace(text)) 
             {
+                itemName = textBox1.Text;
                 return true;
             }
             return false;
@@ -76,7 +77,7 @@ namespace restaurantAuto
 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    pic = dlg.SafeFileName;
+                    pic = $"{textBox1.Text}.jpg";
                     pictureBox1.Image = new Bitmap(dlg.FileName);
                     System.IO.File.Copy(dlg.FileName,$"menu/{textBox1.Text}.jpg", true);
                 }
